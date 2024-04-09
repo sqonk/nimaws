@@ -93,6 +93,10 @@ proc request*(client: var AwsClient, params: Table): Response =
   # utilizing some operator overloading on the create_aws_authorization proc.
   # if passed a key and not headers, just return the authorization string; otherwise, create the key and add to the headers
   client.httpClient.headers.clear()
+  if params.hasKey("storageClass"):
+    echo "setting storage class to $#" % params["storageClass"]
+    client.httpClient.headers.add("x-amz-storage-class", params["storageClass"])
+  
   if client.key_expires <= getTime():
     client.scope.date = getAmzDateString()
     client.key = create_aws_authorization(client.credentials, req,

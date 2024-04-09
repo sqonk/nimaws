@@ -68,12 +68,13 @@ proc get_object*(self: var S3Client, bucket, key: string): Response =
 ##  path has to be absoloute path in the form /path/to/file
 ##  payload is binary string
 proc put_object*(self: var S3Client, bucket, path: string,
-    payload: string): Response {.gcsafe.} =
+    payload: string, storageClass : string = "Standard"): Response {.gcsafe.} =
   let params = {
       "action": "PUT",
       "bucket": bucket,
       "path": path,
-      "payload": payload
+      "payload": payload, 
+      "storageClass" : storageClass
     }.toTable
 
   return self.request(params)
