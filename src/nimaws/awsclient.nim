@@ -106,5 +106,6 @@ proc request*(client: var AwsClient, params: Table): Response =
     let auth = create_aws_authorization(client.credentials[0], client.key, req,
         client.httpClient.headers.table, client.scope)
     client.httpClient.headers.add("Authorization", auth)
-
+    
+  #echo "endpoint = $#" % url
   return client.httpClient.request(url, action, payload)
