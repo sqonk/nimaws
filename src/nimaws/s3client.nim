@@ -47,7 +47,6 @@ proc newS3Client*(credentials: (string, string), region: string = defRegion,
     mhost = awsURI
   endpoint = parseUri(mhost)
 
-
   return S3Client(httpClient: httpclient, credentials: creds, scope: scope,
       endpoint: endpoint, isAWS: endpoint.hostname == "amazonaws.com", key: "",
       key_expires: getTime())
