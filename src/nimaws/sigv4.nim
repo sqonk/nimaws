@@ -91,7 +91,8 @@ proc create_canonical_and_signed_headers(headers: TableRef): (string, string) =
     index = 0
 
   for headerName in keys(headers):
-    shallowCopy(headerNames[index], headerName)
+    #shallowCopy(headerNames[index], headerName)
+    headerNames[index] = headerName
     inc index
 
   sort(headerNames, cmp[string])
