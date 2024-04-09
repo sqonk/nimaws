@@ -67,7 +67,7 @@ proc request*(client: var AwsClient, params: Table): Response =
     url: string
 
   if client.credentials.id.len == 0 or client.credentials.secret.len == 0:
-    raise newException(EAWSCredsMissing, "Missing credentails id/secret pair")
+    raise newException(EAWSCredsMissing, "Missing credentials id/secret pair")
 
   if client.isAws:
     if params.hasKey("bucket"):
