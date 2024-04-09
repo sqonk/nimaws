@@ -20,7 +20,7 @@ It has also been tested on [minio](https://minio.io) which is a s3 compatible st
 
 ### Install with Nimble
 
-`$ nimble install https://github.com/Gooseus/nimaws`
+`$ nimble install https://github.com/sqonk/nimaws`
 
 ### Run tests
 
