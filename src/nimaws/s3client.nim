@@ -104,3 +104,15 @@ proc list_buckets*(self: var S3Client): seq[Bucket] {.gcsafe.} =
     for b in xml.findAll("Bucket"):
       result.add(Bucket(name: b[0].innerText, created: b[1].innerText))
 
+proc head_object*(self: var S3Client, bucket, path: string): Bobject =
+  let params = {
+    "action" : "HEAD",
+    "bucket": bucket,
+    "path": path
+  }.toTable
+  
+  let resp = self.request(params)
+  let info = Bobject(key: resp.headers["x-amz-id-2"], modified: resp.headers["last-modified"],
+     etag: resp.headers["etag"].replace("\"", ""), size: parseBiggestInt(resp.headers["content-length"]))
+     
+  return info
